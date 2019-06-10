@@ -634,7 +634,7 @@ ParseRuleCommand(const char *Message, window_rule *Rule)
 
     int Option;
     bool Success = true;
-    const char *Short = "o:n:r:R:e:s:d:Dl:a:g:";
+    const char *Short = "o:n:r:R:e:h:w:s:d:Dl:a:g:";
 
     struct option Long[] = {
         { "owner", required_argument, NULL, 'o' },
@@ -642,6 +642,8 @@ ParseRuleCommand(const char *Message, window_rule *Rule)
         { "role", required_argument, NULL, 'r' },
         { "subrole", required_argument, NULL, 'R' },
         { "except", required_argument, NULL, 'e' },
+        { "max-height", required_argument, NULL, 'h' },
+        { "max-width", required_argument, NULL, 'w' },
         { "state", required_argument, NULL, 's' },
         { "desktop", required_argument, NULL, 'd' },
         { "monitor", required_argument, NULL, 'm' },
@@ -675,6 +677,14 @@ ParseRuleCommand(const char *Message, window_rule *Rule)
         } break;
         case 'e': {
             Rule->Except = strdup(optarg);
+            HasFilter = true;
+        } break;
+        case 'h': {
+            Rule->MaxHeight = strdup(optarg);
+            HasFilter = true;
+        } break;
+        case 'w': {
+            Rule->MaxWidth = strdup(optarg);
             HasFilter = true;
         } break;
         case 's': {

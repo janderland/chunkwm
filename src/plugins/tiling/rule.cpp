@@ -165,6 +165,18 @@ ApplyWindowRule(macos_window *Window, window_rule *Rule)
         if (!Match) return;
     }
 
+    if (Rule->MaxHeight) {
+        double MaxH = atof(Rule->MaxHeight);
+        Match &= (MaxH > 0) && (MaxH > (double)(Window->Size.height));
+        if (!Match) return;
+    }
+
+    if (Rule->MaxWidth) {
+        double MaxW = atof(Rule->MaxWidth);
+        Match &= (MaxW > 0) && (MaxW > (double)(Window->Size.width));
+        if (!Match) return;
+    }
+
     if (Rule->Desktop)    ApplyWindowRuleDesktop(Window, Rule);
     if (Rule->Monitor)    ApplyWindowRuleMonitor(Window, Rule);
     if (Rule->State)      ApplyWindowRuleState(Window, Rule);

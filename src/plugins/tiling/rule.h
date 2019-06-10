@@ -17,6 +17,8 @@ struct window_rule
     CFStringRef Role;
     CFStringRef Subrole;
     char *Except;
+    char* MaxHeight;
+    char* MaxWidth;
     char *State;
     char *Desktop;
     char *Monitor;
