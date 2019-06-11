@@ -2545,9 +2545,11 @@ QueryWindowsForActiveSpace(int SockFD)
         ASSERT(Window);
 
         if (IsWindowValid(Window)) {
-            BytesWritten = snprintf(Cursor, BufferSize, "%d, %s, %s\n", Window->Id, Window->Owner->Name, Window->Name);
+            BytesWritten = snprintf(Cursor, BufferSize, "%d, %s, %s, %1.0lf x %1.0lf\n",
+                Window->Id, Window->Owner->Name, Window->Name, Window->Size.height, Window->Size.width);
         } else {
-            BytesWritten = snprintf(Cursor, BufferSize, "%d, %s, %s (invalid)\n", Window->Id, Window->Owner->Name, Window->Name);
+            BytesWritten = snprintf(Cursor, BufferSize, "%d, %s, %s, %1.0lf x %1.0lf (invalid)\n",
+                Window->Id, Window->Owner->Name, Window->Name, Window->Size.height, Window->Size.width);
         }
 
         ASSERT(BytesWritten >= 0);
